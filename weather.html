@@ -1,123 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2024年中国每月平均气温柱状图</title>
-    <style>
-        .chart-container {
-            width: 100%;
-            max-width: 960px; /* 调整容器宽度以适应12个月份 */
-            margin: auto;
-            padding: 20px;
-            position: relative;
-        }
+import * as echarts from 'echarts/core';
+import { GridComponent } from 'echarts/components';
+import { BarChart } from 'echarts/charts';
+import { CanvasRenderer } from 'echarts/renderers';
 
-        .bar {
-            width: calc(100% / 12 - 10px);
-            background-color: #4CAF50;
-            margin: 5px;
-            display: inline-block;
-            position: relative;
-            text-align: center;
-        }
+echarts.use([GridComponent, BarChart, CanvasRenderer]);
 
-        .bar-in {
-            width: 100%;
-            height: 20px; /* 基础高度 */
-            background-color: #4CAF50;
-            transition: height 0.3s ease;
-        }
+var chartDom = document.getElementById('main');
+var myChart = echarts.init(chartDom);
+var option;
 
-        .bar:hover .bar-in {
-            height: calc(100% + 10px); /* 鼠标悬停时的效果 */
-        }
+option = {
+  xAxis: {
+    type: 'category',
+    data: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12']
+  },
+  yAxis: {
+    type: 'value'
+  },
+  series: [
+    {
+      data: [-5.1, -0.7, 5.3, 12.9, 18.9, 22.3, 24.3, 25.9, 15.3, 7.3, 2.8, 4.6],
+      type: 'bar'
+    }
+  ]
+};
 
-        .bar:before {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 20px;
-            background-color: #333;
-            transform: skewX(-45deg);
-            z-index: -1;
-        }
-
-        .bar span {
-            position: absolute;
-            bottom: -20px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 12px;
-            color: #fff;
-            width: 100%;
-        }
-    </style>
-</head>
-<body>
-    <div class="chart-container">
-        <!-- 1月 -->
-        <div class="bar" style="height: calc(20px + 5 * 2px);">
-            <div class="bar-in" style="height: calc(20px + 5 * 2px);"></div>
-            <span>1月 (5℃)</span>
-        </div>
-        <!-- 2月 -->
-        <div class="bar" style="height: calc(20px + 6 * 2px);">
-            <div class="bar-in" style="height: calc(20px + 6 * 2px);"></div>
-            <span>2月 (6℃)</span>
-        </div>
-        <!-- 3月 -->
-        <div class="bar" style="height: calc(20px + 10 * 2px);">
-            <div class="bar-in" style="height: calc(20px + 10 * 2px);"></div>
-            <span>3月 (10℃)</span>
-        </div>
-        <!-- 4月 -->
-        <div class="bar" style="height: calc(20px + 15 * 2px);">
-            <div class="bar-in" style="height: calc(20px + 15 * 2px);"></div>
-            <span>4月 (15℃)</span>
-        </div>
-        <!-- 5月 -->
-        <div class="bar" style="height: calc(20px + 20 * 2px);">
-            <div class="bar-in" style="height: calc(20px + 20 * 2px);"></div>
-            <span>5月 (20℃)</span>
-        </div>
-        <!-- 6月 -->
-        <div class="bar" style="height: calc(20px + 25 * 2px);">
-            <div class="bar-in" style="height: calc(20px + 25 * 2px);"></div>
-            <span>6月 (25℃)</span>
-        </div>
-        <!-- 7月 -->
-        <div class="bar" style="height: calc(20px + 30 * 2px);">
-            <div class="bar-in" style="height: calc(20px + 30 * 2px);"></div>
-            <span>7月 (30℃)</span>
-        </div>
-        <!-- 8月 -->
-        <div class="bar" style="height: calc(20px + 29 * 2px);">
-            <div class="bar-in" style="height: calc(20px + 29 * 2px);"></div>
-            <span>8月 (29℃)</span>
-        </div>
-        <!-- 9月 -->
-        <div class="bar" style="height: calc(20px + 24 * 2px);">
-            <div class="bar-in" style="height: calc(20px + 24 * 2px);"></div>
-            <span>9月 (24℃)</span>
-        </div>
-        <!-- 10月 -->
-        <div class="bar" style="height: calc(20px + 18 * 2px);">
-            <div class="bar-in" style="height: calc(20px + 18 * 2px);"></div>
-            <span>10月 (18℃)</span>
-        </div>
-        <!-- 11月 -->
-        <div class="bar" style="height: calc(20px + 12 * 2px);">
-            <div class="bar-in" style="height: calc(20px + 12 * 2px);"></div>
-            <span>11月 (12℃)</span>
-        </div>
-        <!-- 12月 -->
-        <div class="bar" style="height: calc(20px + 8 * 2px);">
-            <div class="bar-in" style="height: calc(20px + 8 * 2px);"></div>
-            <span>12月 (8℃)</span>
-        </div>
-    </div>
-</body>
-</html>
+option && myChart.setOption(option);
